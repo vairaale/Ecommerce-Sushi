@@ -6,67 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amy Sushi · Bebidas</title>
   <link rel="icon" href="../assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mediasqueries.css" />
+  <link rel="stylesheet" href="../css/animaciones.css" />
 </head>
 <body>
   <header>
-    <a href="../index.html" class="logo-link" aria-label="Ir al inicio">
-      <img src="../assets/logo.png" alt="Amy Sushi - logo" class="logo" width="100" height="auto"/>
-    </a>
-    <nav class="navbar">
-     <!--    <label for="menu-toggle" class="menu-label">
-       
-          <img src="BUSCAR UNA IMAGEN class="menu-icon" alt="menu" />
-      </label> 
-      <input type="checkbox" id="menu-toggle" />-->
-      <ul class="listaNavbar">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="./categoria-rolls.html">Rolls</a></li>
-        <li><a href="./categoria-combos.html">Combos</a></li>
-        <li><a href="./categoria-bebidas.html">Bebidas</a></li>
-        <li><a href="./login.html">Login</a></li>
-        <li><a class="btn-logout" href="../index.html" title="Cerrar sesión">Logout</a></li>
-      </ul>
-    </nav>
+    <div class="franja-roja"></div>
+    <div class="contenedor">
+      <a href="../index.html" class="enlace-logo" aria-label="Ir al inicio">
+        <img src="../assets/logo.png" alt="Logo Amy Sushi" class="logo" />
+      </a>
+
+      <nav class="barra-navegacion">
+        <input type="checkbox" id="activar-menu" />
+        <label for="activar-menu" class="boton-menu" aria-label="Abrir menú">
+          <span class="icono-menu">☰</span>
+        </label>
+
+        <ul class="lista-enlaces">
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./categoria-rolls.html">Rolls</a></li>
+          <li><a href="./categoria-combos.html">Combos</a></li>
+          <li><a href="./categoria-bebidas.html">Bebidas</a></li>
+          <li><a href="./login.html">Ingresar</a></li>
+          <li><a class="boton-salir" href="../index.html" title="Cerrar sesión">Salir</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-    <main id="contenido" >
-      <h1>Bebidas</h1>
-      <div class="productos-container">
-        
-        <div class="productos" role="article">
-          <img src="../assets/Unknown.jpeg" alt="Gaseosa" />
-          <h3>Gaseosa</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci in molestiae eos beatae, nihil impedit odio recusandae iure possimus deleniti ullam fugit delectus reiciendis maxime ipsum libero provident animi?</p>
-          <div class="productos-bottom">
-            <span>$ 900</span>
-            <button class="btn-agregar" type="button">Agregar</button>
-          </div>
+  <main class="contenedor" style="padding:20px;">
+    <h1>Bebidas</h1>
+
+    <div class="grilla-productos">
+      <article class="tarjeta-producto" role="article">
+        <img src="../assets/Unknown.jpeg" alt="Gaseosa" />
+        <h3>Gaseosa</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus adipisci in molestiae eos beatae, nihil impedit odio recusandae iure possimus deleniti ullam fugit delectus reiciendis maxime ipsum libero provident animi?</p>
+        <div class="pie-tarjeta">
+          <span>$ 900</span>
+          <button class="boton-agregar" type="button">Agregar</button>
         </div>
-        
-        <div class="productos" role="article">
-          <img src="../assets/botella-de-agua-fotorrealista.jpg" alt="Agua" width="200" height="auto"/>
-          <h3>Agua</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore velit odio quia, aperiam laboriosam voluptatem repudiandae debitis dolores eaque natus, molestiae quam necessitatibus. Sunt veniam harum commodi, quaerat cum recusandae.</p>
-          <div class="productos-bottom">
-            <span>$ 800</span>
-            <button class="btn-agregar" type="button">Agregar</button>
-          </div>
+      </article>
+
+      <article class="tarjeta-producto" role="article">
+        <img src="../assets/botella-de-agua-fotorrealista.jpg" alt="Agua" />
+        <h3>Agua</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore velit odio quia, aperiam laboriosam voluptatem repudiandae debitis dolores eaque natus, molestiae quam necessitatibus. Sunt veniam harum commodi, quaerat cum recusandae.</p>
+        <div class="pie-tarjeta">
+          <span>$ 800</span>
+          <button class="boton-agregar" type="button">Agregar</button>
         </div>
-        
-        <div class="productos" role="article">
-          <img src="../assets/vista-del-vaso-de-agua.jpg" alt="Jugo" width="200" height="auto" >
-                   <h3>Jugos de frutas</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur aperiam sapiente obcaecati delectus, consectetur iste. Id, tenetur beatae deserunt corporis iste, natus tempora quia porro aperiam facilis ab asperiores amet.</p>
-          <div class="productos-bottom">
-            <span>$ 950</span>
-            <button class="btn-agregar" type="button">Agregar</button>
-          </div>
+      </article>
+
+      <article class="tarjeta-producto" role="article">
+        <img src="../assets/vista-del-vaso-de-agua.jpg" alt="Jugos de frutas" />
+        <h3>Jugos de frutas</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur aperiam sapiente obcaecati delectus, consectetur iste. Id, tenetur beatae deserunt corporis iste, natus tempora quia porro aperiam facilis ab asperiores amet.</p>
+        <div class="pie-tarjeta">
+          <span>$ 950</span>
+          <button class="boton-agregar" type="button">Agregar</button>
         </div>
-        
-      </div>
-    </main>
-    
-  <footer style="padding:20px; text-align:center;">
+      </article>
+    </div>
+  </main>
+
+  <footer class="pie" style="padding:20px; text-align:center;">
     <p>&copy; 2025 Amy Sushi · Todos los derechos reservados</p>
   </footer>
 </body>

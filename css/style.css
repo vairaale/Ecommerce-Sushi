@@ -1,0 +1,358 @@
+/* --------------------------------------------------
+   Estilos generales del sitio Amy Sushi
+   Hecho con HTML + CSS puro (1er año)
+-------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
+
+/* ---------- Paleta de colores y variables ---------- */
+:root{
+  --fondo: #ffffff;
+  --fondo-claro: #f7f7f9;
+  --texto: #1a1a1a;
+  --detalle: #5f6c7b;
+  --acento: #e63946;
+  --acento-suave: #ff6b6b;
+  --borde: #e6e6ee;
+  --tarjeta: #ffffff;
+  --sombra: 0 8px 16px rgba(0,0,0,.08);
+  --radio: 14px;
+  --radio-chico: 10px;
+}
+
+/* ---------- Reset y base ---------- */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html, body{
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+
+.contenedor{
+  width:min(1200px, 92%);
+  margin-inline:auto;
+}
+
+/* ---------- Franja roja del encabezado ---------- */
+.franja-roja{
+  height:56px;
+  background: var(--acento);
+}
+
+/* ---------- Encabezado / barra de navegación ---------- */
+header{
+  width:100%;
+  position:sticky;
+  top:0;
+  z-index:50;
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--borde);
+}
+
+/* Contenedor del header */
+header .contenedor{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.8rem 0;
+  position:relative;
+}
+
+/* Logo sobresaliente (rectangular) */
+.logo{
+  width:110px;
+  height:auto;
+  border:none;
+  border-radius:0;
+  object-fit:contain;
+  position:absolute;
+  bottom:0;
+  left:20px;
+  z-index:10;
+}
+
+/* Barra de navegación */
+.barra-navegacion{
+  position:relative;
+  margin-left:140px; /* deja espacio para el logo */
+}
+
+/* Checkbox del menú hamburguesa (oculto) */
+#activar-menu{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* Botón del menú hamburguesa */
+.boton-menu{
+  display:none; /* visible en mobile */
+  user-select:none;
+  border:1px solid var(--borde);
+  background:#fff;
+  border-radius:12px;
+  padding:.45rem .6rem;
+  box-shadow: var(--sombra);
+  cursor:pointer;
+}
+.icono-menu{
+  font-size:1.25rem;
+  line-height:1;
+  display:inline-block;
+}
+
+/* Lista de enlaces del menú */
+.lista-enlaces{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+
+.lista-enlaces a{
+  display:inline-block;
+  padding:.55rem .9rem;
+  border-radius:var(--radio-chico);
+  transition:background .2s ease, transform .15s ease;
+}
+
+.lista-enlaces a:hover{
+  background:#f2f3f5;
+  transform:translateY(-1px);
+}
+
+/* Botón de cierre de sesión */
+.boton-salir{
+  background: var(--acento);
+  color:#fff;
+  box-shadow: var(--sombra);
+}
+
+/* ---------- Sección principal (Héroe) ---------- */
+.seccion-principal {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 2rem;
+  align-items: center;   /* 🔹 centra verticalmente el texto e imagen */
+  padding: 3rem 0 1rem;
+  padding-left: 80px;    /* margen izquierdo que ya tenías */
+}
+
+/* Bloque con marca y texto */
+.bloque-marca {
+  display: grid;
+  gap: 1rem;
+  align-content: center;  /* 🔹 centra el contenido del texto dentro del bloque */
+}
+
+/* Logo grande de la marca */
+.tarjeta-logo{
+  width:clamp(180px, 22vw, 260px);
+  aspect-ratio:3/4;
+  background:#fff;
+  border:1px solid var(--borde);
+  border-radius:12px;
+  box-shadow:var(--sombra);
+  display:grid;
+  place-items:center;
+  padding:12px;
+}
+.tarjeta-logo img{
+  width:88%;
+  height:auto;
+  object-fit:contain;
+}
+
+/* Nombre / leyenda debajo del logo */
+.leyenda-marca{
+  font-weight:700;
+  letter-spacing:.22em;
+  color:#000;
+  font-size:clamp(.95rem, 1.2vw, 1.1rem);
+}
+
+/* Texto principal */
+.texto-principal h1{
+  font-size:clamp(2.2rem, 5vw, 3rem);
+  white-space:nowrap;
+}
+.texto-principal p{
+  color:var(--detalle);
+  max-width:56ch;
+}
+
+/* Imagen de la derecha */
+.imagen-principal {
+  align-self: center;     /* 🔹 asegura que la imagen también esté centrada */
+}
+.img-principal{
+  max-width:450px;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+
+/* ---------- Sección de categorías ---------- */
+.seccion-categorias {
+  padding: 2rem ;
+}
+.titulo-categorias{
+  font-size:1.6rem;
+  margin-bottom:2rem;
+}
+
+/* Grilla de categorías */
+.grilla-categorias {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;              /* 🔹 reduce el ancho general */
+  max-width: 1150px;       /* 🔹 evita que toque los bordes en pantallas grandes */
+  margin: 0 auto;          /* 🔹 centra toda la grilla */
+}
+
+/* Tarjeta de categoría */
+.tarjeta-categoria{
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  box-shadow:var(--sombra);
+  transition:transform .15s ease, box-shadow .2s ease;
+}
+.tarjeta-categoria:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 22px rgba(0,0,0,.12);
+}
+.tarjeta-categoria__img{
+  aspect-ratio:16/10;
+  overflow:hidden;
+}
+.tarjeta-categoria__img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.tarjeta-categoria__info{
+  padding:.9rem 1rem;
+}
+.tarjeta-categoria__titulo{
+  font-size:1.1rem;
+  color:var(--detalle);
+}
+
+/* ---------- Cards de productos ---------- */
+.grilla-productos{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(4, 1fr);
+  margin-top:1rem;
+}
+.tarjeta-producto{
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  padding:.9rem;
+  box-shadow:var(--sombra);
+  display:grid;
+  gap:.5rem;
+   
+}
+.tarjeta-producto img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:var(--radio-chico);
+}
+.tarjeta-producto h3{
+  font-size:1.05rem;
+}
+.tarjeta-producto p{
+  margin:0;
+  font-size:.95rem;
+  color:var(--detalle);
+}
+.pie-tarjeta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:.4rem;
+}
+
+/* Botón “Agregar” */
+.boton-agregar{
+  border:0;
+  background:var(--acento);
+  color:#fff;
+  padding:.55rem .85rem;
+  border-radius:999px;
+  cursor:pointer;
+  transition:transform .15s ease, filter .2s ease;
+}
+.boton-agregar:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+}
+
+/* ---------- Formularios (login y registro) ---------- */
+#login, #registro{
+  width:min(600px, 92%);
+  margin:40px auto;
+  padding:20px;
+  background:var(--fondo-claro);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+}
+
+form{
+  display:grid;
+  gap:.55rem;
+}
+
+label{
+  font-size:.95rem;
+  color:#444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"]{
+  padding:.7rem .85rem;
+  background:#fff;
+  color:var(--texto);
+  border:1px solid var(--borde);
+  border-radius:var(--radio-chico);
+  outline:none;
+}
+input:focus{
+  border-color:var(--acento);
+  box-shadow:0 0 0 3px rgba(230,57,70,.15);
+}
+
+button[type="submit"]{
+  margin-top:.5rem;
+  padding:.7rem 1rem;
+  background:var(--acento);
+  border:0;
+  color:#fff;
+  border-radius:var(--radio);
+  cursor:pointer;
+  box-shadow:var(--sombra);
+}
+
+/* ---------- Pie de página ---------- */
+footer{
+  border-top:1px solid var(--borde);
+  background:#fff;
+  color:#444;
+  text-align:center;
+  padding:20px;
+}
+footer p{ margin:0; }
