@@ -5,25 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amy Sushi · Inicio</title>
-  <!-- Estilos (rutas desde la raíz del proyecto) -->
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/mediasqueries.css" />
   <link rel="stylesheet" href="./css/animaciones.css" />
 </head>
 
 <body>
-  <!-- Encabezado del sitio -->
   <header>
-    <!-- Franja de color superior -->
     <div class="franja-roja"></div>
 
     <div class="contenedor">
-      <!-- Logo principal (rectangular) -->
       <a href="index.html" class="enlace-logo" aria-label="Ir al inicio">
         <img src="./assets/logo.png" alt="Logo Amy Sushi" class="logo" />
       </a>
 
-      <!-- Barra de navegación -->
       <nav class="barra-navegacion">
         <!-- Toggle del menú (oculto) -->
         <input type="checkbox" id="activar-menu" />
@@ -32,43 +27,30 @@
           <span class="icono-menu">☰</span>
         </label>
 
-        <!-- Lista de enlaces -->
         <ul class="lista-enlaces">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="./pages/categoria-rolls.html">Rolls</a></li>
-          <li><a href="./pages/categoria-combos.html">Combos</a></li>
-          <li><a href="./pages/categoria-bebidas.html">Bebidas</a></li>
-          <li><a href="./pages/login.html">Ingresar</a></li>
-          <li><a class="boton-salir" href="index.html" title="Cerrar sesión">Salir</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Sección principal (héroe) -->
   <main class="seccion-principal">
     <div class="bloque-marca">
-    
 
-      <!-- Texto principal -->
       <div class="texto-principal">
         <h1>El mejor Sushi de Córdoba</h1>
         <p>Somos la única franquicia reconocida del creador de sushi Aytokimo Tokisha. Calidad y frescura son nuestros distintivos. ¡Disfrutá estas delicias con un click!</p>
       </div>
     </div>
 
-    <!-- Imagen destacada -->
     <div class="imagen-principal">
       <img class="img-principal" src="./assets/hero.png" alt="Tabla de sushi" />
     </div>
   </main>
 
-  <!-- Sección de categorías -->
   <section class="seccion-categorias" aria-labelledby="titulo-categorias">
     <h2 id="titulo-categorias" class="titulo-categorias">Categorías</h2>
 
     <article class="grilla-categorias">
-      <!-- Tarjeta: Rolls -->
       <a class="tarjeta-categoria" href="./pages/categoria-rolls.html" aria-label="Ir a categoría Rolls">
         <div class="tarjeta-categoria__img">
           <img src="./assets/californiaroll.jpeg" alt="Rolls" width="200" height="auto" />
@@ -78,7 +60,6 @@
         </div>
       </a>
 
-      <!-- Tarjeta: Combos -->
       <a class="tarjeta-categoria" href="./pages/categoria-combos.html" aria-label="Ir a categoría Combos">
         <div class="tarjeta-categoria__img">
           <img src="./assets/hero.png" alt="Combos" width="200" height="auto" />
@@ -88,7 +69,6 @@
         </div>
       </a>
 
-      <!-- Tarjeta: Bebidas -->
       <a class="tarjeta-categoria" href="./pages/categoria-bebidas.html" aria-label="Ir a categoría Bebidas">
         <div class="tarjeta-categoria__img">
           <img src="./assets/bebidas.jpeg" alt="Bebidas" width="200" height="auto" />
@@ -100,9 +80,9 @@
     </article>
   </section>
 
-  <!-- Pie de página -->
   <footer class="pie" style="padding:20px; text-align:center;">
     <p>&copy; 2025 Amy Sushi · Todos los derechos reservados</p>
   </footer>
+<script src="./js/app.js"></script>
 </body>
 </html>

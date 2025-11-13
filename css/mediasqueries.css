@@ -1,19 +1,13 @@
-/* --------------------------------------------------
-   Media Queries (responsivo básico)
-   - Ajustes de layout y navegación
-   - Nombres de clases en español
--------------------------------------------------- */
-
 /* <= 992px: apilamos el héroe y ajustamos grillas */
 @media (max-width: 992px){
   .seccion-principal{
     grid-template-columns: 1fr;
     text-align: center;
-    padding-left: 0;         /* sin sangría en pantallas medianas */
+    padding-left: 0;         
   }
 
   .tarjeta-logo{ margin-inline: auto; }
-  .bloque-marca{ margin-left: 0; }   /* quitamos corrimiento lateral */
+  .bloque-marca{ margin-left: 0; }   
 
   .grilla-categorias{
     grid-template-columns: repeat(2, 1fr);
@@ -43,13 +37,13 @@
     border-top: none;
     padding: .8rem;
     border-bottom-left-radius: 12px;
-    display: none;                 /* se muestra con el checkbox */
+    display: none;                 
     flex-direction: column;
     gap: .4rem;
     box-shadow: var(--sombra);
   }
 
-  /* cuando el checkbox está activado, mostramos el menú */
+  /* cuando el checkbox está activado, muestro el menú */
   #activar-menu:checked ~ .lista-enlaces{ display: flex; }
 
   /* grillas más angostas en tablets */

@@ -1,8 +1,3 @@
-/* --------------------------------------------------
-   Estilos generales del sitio Amy Sushi
-   Hecho con HTML + CSS puro (1er año)
--------------------------------------------------- */
-
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
 
 /* ---------- Paleta de colores y variables ---------- */
@@ -20,7 +15,7 @@
   --radio-chico: 10px;
 }
 
-/* ---------- Reset y base ---------- */
+
 *{ margin:0; padding:0; box-sizing:border-box; }
 
 html, body{
@@ -38,7 +33,6 @@ ul{ list-style:none; }
   margin-inline:auto;
 }
 
-/* ---------- Franja roja del encabezado ---------- */
 .franja-roja{
   height:56px;
   background: var(--acento);
@@ -77,10 +71,9 @@ header .contenedor{
   z-index:10;
 }
 
-/* Barra de navegación */
 .barra-navegacion{
   position:relative;
-  margin-left:140px; /* deja espacio para el logo */
+  margin-left:140px; 
 }
 
 /* Checkbox del menú hamburguesa (oculto) */
@@ -92,7 +85,7 @@ header .contenedor{
 
 /* Botón del menú hamburguesa */
 .boton-menu{
-  display:none; /* visible en mobile */
+  display:none; 
   user-select:none;
   border:1px solid var(--borde);
   background:#fff;
@@ -133,24 +126,23 @@ header .contenedor{
   box-shadow: var(--sombra);
 }
 
-/* ---------- Sección principal (Héroe) ---------- */
 .seccion-principal {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   gap: 2rem;
-  align-items: center;   /* 🔹 centra verticalmente el texto e imagen */
+  align-items: center;   
   padding: 3rem 0 1rem;
-  padding-left: 80px;    /* margen izquierdo que ya tenías */
+  padding-left: 80px;    
 }
 
 /* Bloque con marca y texto */
 .bloque-marca {
   display: grid;
   gap: 1rem;
-  align-content: center;  /* 🔹 centra el contenido del texto dentro del bloque */
+  align-content: center;  
 }
 
-/* Logo grande de la marca */
+
 .tarjeta-logo{
   width:clamp(180px, 22vw, 260px);
   aspect-ratio:3/4;
@@ -168,7 +160,6 @@ header .contenedor{
   object-fit:contain;
 }
 
-/* Nombre / leyenda debajo del logo */
 .leyenda-marca{
   font-weight:700;
   letter-spacing:.22em;
@@ -188,7 +179,7 @@ header .contenedor{
 
 /* Imagen de la derecha */
 .imagen-principal {
-  align-self: center;     /* 🔹 asegura que la imagen también esté centrada */
+  align-self: center;    
 }
 .img-principal{
   max-width:450px;
@@ -211,9 +202,9 @@ header .contenedor{
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
-  width: 80%;              /* 🔹 reduce el ancho general */
-  max-width: 1150px;       /* 🔹 evita que toque los bordes en pantallas grandes */
-  margin: 0 auto;          /* 🔹 centra toda la grilla */
+  width: 80%;             
+  max-width: 1150px;       
+  margin: 0 auto;          
 }
 
 /* Tarjeta de categoría */
@@ -356,3 +347,60 @@ footer{
   padding:20px;
 }
 footer p{ margin:0; }
+.cantidad-producto{
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.btn-cantidad{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cantidad-valor{
+  min-width: 18px;
+  text-align: center;
+  font-size: .95rem;
+}
+.cantidad-producto {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.btn-cantidad {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--borde);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cantidad-valor {
+  min-width: 18px;
+  text-align: center;
+}
+
+.boton-agregar {
+  border: 0;
+  background: var(--acento);
+  color: #fff;
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  width: 90px;
+  text-align: center;
+}
+
+.boton-agregar:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
