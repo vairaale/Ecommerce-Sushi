@@ -1,40 +1,36 @@
-document.addEventListener('DOMContentLoaded', function () {
-  console.log('home.js cargado ✅');
+// esto es para Productos destacados en HOME
 
-  // Solo corre en la home
-  const contenedoresHome = document.querySelectorAll('.grilla-productos-home');
-  if (!contenedoresHome.length) return;
+// Traigo los productos desde el JSON
+async function cargarProductosDestacados() {
+  try {
+    const respuesta = await fetch('./data/productos.json');
+    const data = await respuesta.json();
 
-  // Traemos el JSON (estando en index.html, la ruta es ./data/...)
-  fetch('./data/productos.json')
-    .then(function (respuesta) {
-      return respuesta.json();
-    })
-    .then(function (datos) {
-      console.log('Productos desde JSON:', datos);
-      // Rellenar cada bloque de la home
-      contenedoresHome.forEach(function (contenedor) {
-        const categoria = contenedor.dataset.categoria; // "rolls", "combos" o "bebidas"
-        const lista = datos[categoria];
-        if (!lista) return;
+    mostrarProductosHome(data.rolls, 'rolls-home');
+    mostrarProductosHome(data.combos, 'combos-home');
+    mostrarProductosHome(data.bebidas, 'bebidas-home');
+  } catch (error) {
+    console.error('Error cargando productos del JSON:', error);
+  }
+}
 
-        // dejamos máximo 3 productos
-        const seleccion = lista.slice(0, 2);
+// Agrego solo 2 productos de cada categoría nada mas
+function mostrarProductosHome(lista, idContenedor) {
+  const contenedor = document.getElementById(idContenedor);
+  if (!contenedor) return;
 
-        contenedor.innerHTML = '';
+  contenedor.innerHTML = '';
 
-        seleccion.forEach(function (producto) {
-          const card = crearTarjetaHome(producto);
-          contenedor.appendChild(card);
-        });
-      });
-    })
-    .catch(function (error) {
-      console.error('Error al cargar productos.json', error);
-    });
-});
+  // 2 productos
+  const seleccion = lista.slice(0, 2);
 
-// Versión sencilla de card para la home
+  seleccion.forEach(producto => {
+    const card = crearTarjetaHome(producto);
+    contenedor.appendChild(card);
+  });
+}
+
+// Card igual a categorías pero 
 function crearTarjetaHome(producto) {
   const article = document.createElement('article');
   article.classList.add('tarjeta-producto');
@@ -52,11 +48,10 @@ function crearTarjetaHome(producto) {
   const pie = document.createElement('div');
   pie.classList.add('pie-tarjeta');
 
-  // PRECIO
   const spanPrecio = document.createElement('span');
   spanPrecio.textContent = `$ ${producto.precio}`;
 
-  // CANTIDAD (+ / -)
+  // Control de cantidad
   const divCantidad = document.createElement('div');
   divCantidad.classList.add('cantidad-producto');
 
@@ -92,18 +87,14 @@ function crearTarjetaHome(producto) {
   divCantidad.appendChild(spanCantidad);
   divCantidad.appendChild(btnMas);
 
-  // BOTÓN AGREGAR
+  // Botón agregar
   const btnAgregar = document.createElement('button');
   btnAgregar.textContent = 'Agregar';
   btnAgregar.classList.add('boton-agregar');
   btnAgregar.type = 'button';
 
   btnAgregar.addEventListener('click', function () {
-    if (cantidad === 0) {
-      alert('Seleccioná al menos 1 unidad.');
-      return;
-    }
-    alert(`Agregaste ${cantidad} unidad/es de ${producto.nombre}`);
+    agregarAlCarrito(producto, cantidad);
   });
 
   const divPieDerecha = document.createElement('div');
@@ -125,3 +116,6 @@ function crearTarjetaHome(producto) {
 
   return article;
 }
+
+//Inicializar HOME
+document.addEventListener('DOMContentLoaded', cargarProductosDestacados);

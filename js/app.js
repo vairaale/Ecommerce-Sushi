@@ -5,24 +5,31 @@ document.addEventListener('DOMContentLoaded', function () {
   prepararLogin();
   prepararRegistro();
   cargarProductosSegunPagina();
+  prepararCarrito();
+  protegerPaginasPrivadas();
 });
 
+// SESIÓN DE USUARIO (sessionStorage)
+function usuarioEstaLogueado() {
+  return sessionStorage.getItem('usuarioActual') !== null;
+}
 
-// NAVBAR (array de páginas)
-
+//NAVBAR (array de páginas)
 const paginas = [
   { titulo: 'Inicio', archivo: 'index.html', tipo: 'home' },
   { titulo: 'Rolls', archivo: 'categoria-rolls.html', tipo: 'categoria' },
   { titulo: 'Combos', archivo: 'categoria-combos.html', tipo: 'categoria' },
-  { titulo: 'Bebidas', archivo: 'categoria-bebidas.html', tipo: 'categoria' }
+  { titulo: 'Bebidas', archivo: 'categoria-bebidas.html', tipo: 'categoria' },
+  { titulo: '🛒', archivo: 'carrito.html', tipo: 'categoria' } // carrito con icono corroborar si funciona
 ];
 
 function obtenerHref(pagina, estoyEnSubcarpeta) {
   if (pagina.tipo === 'home') {
     return estoyEnSubcarpeta ? '../index.html' : 'index.html';
   } else {
+  
     return estoyEnSubcarpeta
-      ? `./${pagina.archivo}`          // si estoy en /pages
+      ? `./${pagina.archivo}`          // si ya estoy en /pages
       : `./pages/${pagina.archivo}`;  // si estoy en index
   }
 }
@@ -35,11 +42,11 @@ function construirNavbar() {
   const estoyEnSubcarpeta = ruta.includes('/pages/');
   const esLogin = ruta.includes('login.html');
   const esRegistro = ruta.includes('register.html');
-  const esHome = ruta.endsWith('index.html') || ruta.endsWith('/');
+  const logueado = usuarioEstaLogueado();
 
   lista.innerHTML = '';
 
-  // Si estoy en LOGIN o REGISTRO → menú simple
+  // Si estoy en LOGIN o REGISTRO → mostrar solo "Inicio"
   if (esLogin || esRegistro) {
     const liInicio = document.createElement('li');
     const aInicio = document.createElement('a');
@@ -50,7 +57,28 @@ function construirNavbar() {
     return;
   }
 
-  // Menú normal con páginas
+  // USUARIO NO LOGUEADO → SOLO Inicio y tambien iniciar sesion
+  if (!logueado) {
+    // Inicio
+    const liInicio = document.createElement('li');
+    const aInicio = document.createElement('a');
+    aInicio.textContent = 'Inicio';
+    aInicio.href = estoyEnSubcarpeta ? '../index.html' : 'index.html';
+    liInicio.appendChild(aInicio);
+    lista.appendChild(liInicio);
+
+    // Iniciar sesión
+    const liLogin = document.createElement('li');
+    const aLogin = document.createElement('a');
+    aLogin.textContent = 'Iniciar sesión';
+    aLogin.href = estoyEnSubcarpeta ? './login.html' : './pages/login.html';
+    liLogin.appendChild(aLogin);
+    lista.appendChild(liLogin);
+
+    return;
+  }
+
+  // USUARIO LOGUEADO → menú completo ACA MUESTRO TODO LO QUE HYA 
   paginas.forEach(pagina => {
     const li = document.createElement('li');
     const a = document.createElement('a');
@@ -60,18 +88,7 @@ function construirNavbar() {
     lista.appendChild(li);
   });
 
-  // mostrar "Iniciar sesión" (NO logout)
-  if (esHome) {
-    const liLogin = document.createElement('li');
-    const aLogin = document.createElement('a');
-    aLogin.textContent = 'Iniciar sesión';
-    aLogin.href = './pages/login.html';
-    liLogin.appendChild(aLogin);
-    lista.appendChild(liLogin);
-    return;
-  }
-
-  //En páginas internas → agregar botón "Salir"
+  // Botón "Salir"
   const liLogout = document.createElement('li');
   const btnLogout = document.createElement('a');
   btnLogout.textContent = 'Salir';
@@ -81,7 +98,10 @@ function construirNavbar() {
   btnLogout.addEventListener('click', function (e) {
     e.preventDefault();
 
-    // volver al login según ubicación
+  
+    sessionStorage.removeItem('usuarioActual');
+
+    // Redirigimos 
     if (estoyEnSubcarpeta) {
       window.location.href = './login.html';
     } else {
@@ -93,8 +113,7 @@ function construirNavbar() {
   lista.appendChild(liLogout);
 }
 
-// LOGIN → REDIRECCIONAR AL INICIO
-
+// LOGIN
 function prepararLogin() {
   const loginSection = document.getElementById('login');
   if (!loginSection) return; // si no estoy en login, no hago nada
@@ -102,16 +121,36 @@ function prepararLogin() {
   const form = loginSection.querySelector('form');
   if (!form) return;
 
+  let mensaje = document.getElementById('mensaje-login');
+  if (!mensaje) {
+    mensaje = document.createElement('p');
+    mensaje.id = 'mensaje-login';
+    mensaje.style.color = 'red';
+    mensaje.style.marginTop = '10px';
+    loginSection.appendChild(mensaje);
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    console.log('Formulario de login enviado, redirigiendo...');
+
+    const emailInput = loginSection.querySelector('#email');
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    if (!email) {
+      mensaje.textContent = 'Ingresá un email válido.';
+      return;
+    }
+
+    // Guardamos la info básica del usuario en la sesión
+    const usuario = { email: email };
+    sessionStorage.setItem('usuarioActual', JSON.stringify(usuario));
+
+    // Redirigimos a la home
     window.location.href = '../index.html';
   });
 }
 
-
-// REGISTRO → REDIRECCIONAR AL INICIO
-
+// REGISTRO
 function prepararRegistro() {
   const registroSection = document.getElementById('registro');
   if (!registroSection) return; // si no estoy en registro, no hago nada
@@ -119,16 +158,196 @@ function prepararRegistro() {
   const form = registroSection.querySelector('form');
   if (!form) return;
 
+  let mensaje = document.getElementById('mensaje-registro');
+  if (!mensaje) {
+    mensaje = document.createElement('p');
+    mensaje.id = 'mensaje-registro';
+    mensaje.style.marginTop = '10px';
+    registroSection.appendChild(mensaje);
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    console.log('Formulario de registro enviado, redirigiendo...');
-    window.location.href = '../index.html';
+
+    const nombre = registroSection.querySelector('#nombre')?.value.trim() || '';
+    const apellido = registroSection.querySelector('#apellido')?.value.trim() || '';
+    const email = registroSection.querySelector('#email')?.value.trim() || '';
+
+    if (!email) {
+      mensaje.style.color = 'red';
+      mensaje.textContent = 'Ingresá un email válido.';
+      return;
+    }
+
+    const usuario = { nombre, apellido, email };
+    sessionStorage.setItem('usuarioActual', JSON.stringify(usuario));
+
+    mensaje.style.color = 'green';
+    mensaje.textContent = 'Registro exitoso. Redirigiendo a la tienda...';
+
+    setTimeout(function () {
+      window.location.href = '../index.html';
+    }, 1000);
   });
 }
 
+// PROTEGER PÁGINAS PRIVADAS
+function protegerPaginasPrivadas() {
+  const ruta = window.location.pathname;
+  const esPaginaPrivada =
+    ruta.includes('categoria-rolls.html') ||
+    ruta.includes('categoria-combos.html') ||
+    ruta.includes('categoria-bebidas.html') ||
+    ruta.includes('carrito.html');
 
-//PRODUCTOS (arrays con descripción corta)
+  if (esPaginaPrivada && !usuarioEstaLogueado()) {
+    // Todas las páginas privadas están en /pages
+    window.location.href = './login.html';
+  }
+}
 
+// CARRITO (localStorage)
+function obtenerCarrito() {
+  const guardado = localStorage.getItem('carrito');
+  if (!guardado) {
+    return [];
+  }
+  return JSON.parse(guardado);
+}
+
+function guardarCarrito(carrito) {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function agregarAlCarrito(producto, cantidad) {
+  // Si no está logueado → lo mando al login
+  if (!usuarioEstaLogueado()) {
+    alert('Para comprar tenés que iniciar sesión.');
+    const estoyEnSubcarpeta = window.location.pathname.includes('/pages/');
+    if (estoyEnSubcarpeta) {
+      window.location.href = './login.html';
+    } else {
+      window.location.href = './pages/login.html';
+    }
+    return;
+  }
+
+  if (cantidad <= 0) {
+    alert('Seleccioná al menos 1 unidad.');
+    return;
+  }
+
+  const carrito = obtenerCarrito();
+
+  const itemExistente = carrito.find(function (item) {
+    return item.id === producto.id;
+  });
+
+  if (itemExistente) {
+    itemExistente.cantidad += cantidad;
+  } else {
+    carrito.push({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      cantidad: cantidad
+    });
+  }
+
+  guardarCarrito(carrito);
+  alert(`Agregaste ${cantidad} unidad/es de ${producto.nombre} al carrito.`);
+}
+
+// Mostrar carrito en carrito.html
+function prepararCarrito() {
+  const carritoMain = document.getElementById('carrito');
+  if (!carritoMain) return; // si no estoy en carrito.html, no hago nada
+
+  const carrito = obtenerCarrito();
+  const mensajeVacio = document.getElementById('carrito-vacio');
+  const tabla = document.getElementById('tabla-carrito');
+  const tbody = tabla.querySelector('tbody');
+  const totalTexto = document.getElementById('total-carrito');
+
+  if (!carrito.length) {
+    mensajeVacio.style.display = 'block';
+    tabla.style.display = 'none';
+    totalTexto.style.display = 'none';
+    return;
+  }
+
+  mensajeVacio.style.display = 'none';
+  tabla.style.display = 'table';
+  totalTexto.style.display = 'block';
+
+  tbody.innerHTML = '';
+  let total = 0;
+
+  carrito.forEach(function (item) {
+    const subtotal = item.precio * item.cantidad;
+    total += subtotal;
+
+    const tr = document.createElement('tr');
+
+    const tdNombre = document.createElement('td');
+    tdNombre.textContent = item.nombre;
+    tdNombre.style.padding = '.5rem';
+
+    const tdPrecio = document.createElement('td');
+    tdPrecio.textContent = `$ ${item.precio}`;
+    tdPrecio.style.textAlign = 'right';
+    tdPrecio.style.padding = '.5rem';
+
+    const tdCantidad = document.createElement('td');
+    tdCantidad.textContent = item.cantidad;
+    tdCantidad.style.textAlign = 'center';
+    tdCantidad.style.padding = '.5rem';
+
+    const tdSubtotal = document.createElement('td');
+    tdSubtotal.textContent = `$ ${subtotal}`;
+    tdSubtotal.style.textAlign = 'right';
+    tdSubtotal.style.padding = '.5rem';
+
+    const tdAcciones = document.createElement('td');
+    tdAcciones.style.textAlign = 'center';
+    tdAcciones.style.padding = '.5rem';
+
+    const btnEliminar = document.createElement('button');
+    btnEliminar.textContent = 'Eliminar';
+    btnEliminar.type = 'button';
+    btnEliminar.style.padding = '.3rem .6rem';
+    btnEliminar.style.borderRadius = '8px';
+    btnEliminar.style.border = '1px solid #ccc';
+    btnEliminar.style.cursor = 'pointer';
+
+    btnEliminar.addEventListener('click', function () {
+      eliminarDelCarrito(item.id);
+    });
+
+    tdAcciones.appendChild(btnEliminar);
+
+    tr.appendChild(tdNombre);
+    tr.appendChild(tdPrecio);
+    tr.appendChild(tdCantidad);
+    tr.appendChild(tdSubtotal);
+    tr.appendChild(tdAcciones);
+
+    tbody.appendChild(tr);
+  });
+
+  totalTexto.textContent = `Total: $ ${total}`;
+}
+
+function eliminarDelCarrito(idProducto) {
+  let carrito = obtenerCarrito();
+  carrito = carrito.filter(function (item) {
+    return item.id !== idProducto;
+  });
+  guardarCarrito(carrito);
+  prepararCarrito(); // vuelvo a dibujar la tabla
+}
+
+// PRODUCTOS DE CATEGORÍA
 
 const productosRolls = [
   {
@@ -202,9 +421,7 @@ const productosBebidas = [
   }
 ];
 
-// 5) COMPONENTE DE CARD DE PRODUCTO
-
-
+// Crear card de producto para categorías
 function crearTarjetaProducto(producto) {
   const article = document.createElement('article');
   article.classList.add('tarjeta-producto');
@@ -262,22 +479,19 @@ function crearTarjetaProducto(producto) {
   divCantidad.appendChild(spanCantidad);
   divCantidad.appendChild(btnMas);
 
-  // BOTÓN AGREGAR (rojo) PROBAR SI FUNCIONA
+  // BOTÓN AGREGAR
   const btnAgregar = document.createElement('button');
   btnAgregar.textContent = 'Agregar';
   btnAgregar.classList.add('boton-agregar');
   btnAgregar.type = 'button';
 
   btnAgregar.addEventListener('click', function () {
-    console.log(`Se agregó ${cantidad} unidad(es) de ${producto.nombre}`);
-    alert(`Agregaste ${cantidad} unidad/es de ${producto.nombre}`);
+    agregarAlCarrito(producto, cantidad);
   });
 
-  // Contenedor derecha (cantidad + botón agregar)
   const divPieDerecha = document.createElement('div');
   divPieDerecha.style.display = 'flex';
   divPieDerecha.style.flexDirection = 'column';
-  divPieDerecha.style.justifyContent = 'center';
   divPieDerecha.style.alignItems = 'flex-end';
   divPieDerecha.style.gap = '6px';
 
@@ -287,7 +501,6 @@ function crearTarjetaProducto(producto) {
   pie.appendChild(spanPrecio);
   pie.appendChild(divPieDerecha);
 
-  // Armado final de la card
   article.appendChild(img);
   article.appendChild(h3);
   article.appendChild(p);
@@ -296,7 +509,7 @@ function crearTarjetaProducto(producto) {
   return article;
 }
 
-// 6) CARGAR PRODUCTOS SEGÚN PÁGINA
+// Cargar productos según página de categoría
 function cargarProductosSegunPagina() {
   const contenedor = document.querySelector('.grilla-productos');
   if (!contenedor) return;
@@ -315,7 +528,7 @@ function cargarProductosSegunPagina() {
   if (!lista) return;
 
   contenedor.innerHTML = '';
-  lista.forEach(prod => {
+  lista.forEach(function (prod) {
     const card = crearTarjetaProducto(prod);
     contenedor.appendChild(card);
   });

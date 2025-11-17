@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amy Sushi · Carrito</title>
+
+  <link rel="icon" href="../assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/mediasqueries.css" />
+  <link rel="stylesheet" href="../css/animaciones.css" />
+</head>
+<body>
+  <header>
+    <div class="franja-roja"></div>
+    <div class="contenedor">
+      <a href="../index.html" class="enlace-logo" aria-label="Ir al inicio">
+        <img src="../assets/logo.png" alt="Logo Amy Sushi" class="logo" />
+      </a>
+
+      <nav class="barra-navegacion">
+        <input type="checkbox" id="activar-menu" />
+        <label for="activar-menu" class="boton-menu" aria-label="Abrir menú">
+          <span class="icono-menu">☰</span>
+        </label>
+
+        <ul class="lista-enlaces">
+          <!-- La navbar se arma desde app.js -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="carrito" class="contenedor" style="margin-top: 2rem;">
+    <h1>Carrito de compras</h1>
+
+    <p id="carrito-vacio">Todavía no agregaste productos a tu carrito.</p>
+
+    <table id="tabla-carrito" style="width:100%; border-collapse: collapse; margin-top:1rem; display:none;">
+      <thead>
+        <tr>
+          <th style="text-align:left; border-bottom:1px solid #ddd; padding:.5rem;">Producto</th>
+          <th style="text-align:right; border-bottom:1px solid #ddd; padding:.5rem;">Precio</th>
+          <th style="text-align:center; border-bottom:1px solid #ddd; padding:.5rem;">Cantidad</th>
+          <th style="text-align:right; border-bottom:1px solid #ddd; padding:.5rem;">Subtotal</th>
+          <th style="text-align:center; border-bottom:1px solid #ddd; padding:.5rem;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Acá se cargan los productos del carrito -->
+      </tbody>
+    </table>
+
+    <p id="total-carrito" style="text-align:right; font-weight:bold; margin-top:1rem; display:none;"></p>
+  </main>
+
+  <footer class="pie" style="padding:20px; text-align:center; margin-top:2rem;">
+    <p>&copy; 2025 Amy Sushi · Todos los derechos reservados</p>
+  </footer>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
