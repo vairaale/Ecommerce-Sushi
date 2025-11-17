@@ -1,0 +1,71 @@
+{
+  "rolls": [
+    {
+      "id": 1,
+      "nombre": "California Roll",
+      "descripcion": "Clásico roll con palta, pepino y kanikama. Fresco y suave.",
+      "precio": 350,
+      "imagen": "assets/sushi-de-cerca.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "Futomaki",
+      "descripcion": "Roll grande relleno de vegetales y pescado. Ideal para compartir.",
+      "precio": 380,
+      "imagen": "assets/vista-frontal-maki-sushi-rolls-con-semillas-de-sesamo.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Salmón Roll",
+      "descripcion": "Roll de salmón fresco con palta, suave y delicioso.",
+      "precio": 750,
+      "imagen": "assets/maki-de-sushi-de-aguacate-unico-aislado-sobre-fondo-blanco.jpg"
+    }
+  ],
+  "combos": [
+    {
+      "id": 1,
+      "nombre": "Combo Sunset",
+      "descripcion": "Variado mix de rolls clásicos y especiales. Perfecto para dos personas.",
+      "precio": 2200,
+      "imagen": "assets/vista-de-la-deliciosa-comida-asiatica-con-efecto-3d.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "Combo Salchi",
+      "descripcion": "Selección económica de rolls surtidos. Ideal para una comida rápida.",
+      "precio": 1990,
+      "imagen": "assets/maki-sushi-aislado-en-blanco.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Combo Pop",
+      "descripcion": "Combo liviano y fresco con piezas variadas para cualquier ocasión.",
+      "precio": 2100,
+      "imagen": "assets/composicion-flat-lay-de-sushi.jpg"
+    }
+  ],
+  "bebidas": [
+    {
+      "id": 1,
+      "nombre": "Gaseosa",
+      "descripcion": "Bebida refrescante ideal para acompañar tus rolls.",
+      "precio": 900,
+      "imagen": "assets/Unknown.jpeg"
+    },
+    {
+      "id": 2,
+      "nombre": "Agua mineral",
+      "descripcion": "Agua natural purificada. La opción más liviana.",
+      "precio": 800,
+      "imagen": "assets/botella-de-agua-fotorrealista.jpg"
+    },
+    {
+      "id": 3,
+      "nombre": "Jugo de frutas",
+      "descripcion": "Jugo natural exprimido, dulce y refrescante.",
+      "precio": 950,
+      "imagen": "assets/vista-del-vaso-de-agua.jpg"
+    }
+  ]
+}

@@ -404,3 +404,12 @@ footer p{ margin:0; }
   transform: translateY(-2px);
   filter: brightness(1.05);
 }
+/* Productos destacados centrados en home */
+.grilla-productos-home {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  
+  gap: 1.2rem;
+  justify-content: center;
+  width: 60%;                
+  margin: 0 auto;            
+}

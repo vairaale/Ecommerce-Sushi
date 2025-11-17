@@ -1,6 +1,3 @@
-// ===============================
-// 0) INICIALIZACIÓN
-// ===============================
 document.addEventListener('DOMContentLoaded', function () {
   console.log('app.js cargado ✅');
 
@@ -10,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   cargarProductosSegunPagina();
 });
 
-// ===============================
-// 1) NAVBAR (array de páginas)
-// ===============================
+
+// NAVBAR (array de páginas)
+
 const paginas = [
   { titulo: 'Inicio', archivo: 'index.html', tipo: 'home' },
   { titulo: 'Rolls', archivo: 'categoria-rolls.html', tipo: 'categoria' },
@@ -42,7 +39,7 @@ function construirNavbar() {
 
   lista.innerHTML = '';
 
-  // 🔹 Si estoy en LOGIN o REGISTRO → menú simple
+  // Si estoy en LOGIN o REGISTRO → menú simple
   if (esLogin || esRegistro) {
     const liInicio = document.createElement('li');
     const aInicio = document.createElement('a');
@@ -53,7 +50,7 @@ function construirNavbar() {
     return;
   }
 
-  // 🔹 Menú normal con páginas
+  // Menú normal con páginas
   paginas.forEach(pagina => {
     const li = document.createElement('li');
     const a = document.createElement('a');
@@ -63,7 +60,7 @@ function construirNavbar() {
     lista.appendChild(li);
   });
 
-  // 🔹 Si estoy en la HOME → mostrar "Iniciar sesión" (NO logout)
+  // mostrar "Iniciar sesión" (NO logout)
   if (esHome) {
     const liLogin = document.createElement('li');
     const aLogin = document.createElement('a');
@@ -74,7 +71,7 @@ function construirNavbar() {
     return;
   }
 
-  // 🔹 En páginas internas → agregar botón "Salir"
+  //En páginas internas → agregar botón "Salir"
   const liLogout = document.createElement('li');
   const btnLogout = document.createElement('a');
   btnLogout.textContent = 'Salir';
@@ -96,9 +93,8 @@ function construirNavbar() {
   lista.appendChild(liLogout);
 }
 
-// ===============================
-// 2) LOGIN → REDIRECCIONAR AL INICIO
-// ===============================
+// LOGIN → REDIRECCIONAR AL INICIO
+
 function prepararLogin() {
   const loginSection = document.getElementById('login');
   if (!loginSection) return; // si no estoy en login, no hago nada
@@ -113,9 +109,9 @@ function prepararLogin() {
   });
 }
 
-// ===============================
-// 3) REGISTRO → REDIRECCIONAR AL INICIO
-// ===============================
+
+// REGISTRO → REDIRECCIONAR AL INICIO
+
 function prepararRegistro() {
   const registroSection = document.getElementById('registro');
   if (!registroSection) return; // si no estoy en registro, no hago nada
@@ -130,9 +126,9 @@ function prepararRegistro() {
   });
 }
 
-// ===============================
-// 4) PRODUCTOS (arrays con descripción corta)
-// ===============================
+
+//PRODUCTOS (arrays con descripción corta)
+
 
 const productosRolls = [
   {
@@ -206,9 +202,8 @@ const productosBebidas = [
   }
 ];
 
-// ===============================
 // 5) COMPONENTE DE CARD DE PRODUCTO
-// ===============================
+
 
 function crearTarjetaProducto(producto) {
   const article = document.createElement('article');
@@ -267,7 +262,7 @@ function crearTarjetaProducto(producto) {
   divCantidad.appendChild(spanCantidad);
   divCantidad.appendChild(btnMas);
 
-  // BOTÓN AGREGAR (rojo)
+  // BOTÓN AGREGAR (rojo) PROBAR SI FUNCIONA
   const btnAgregar = document.createElement('button');
   btnAgregar.textContent = 'Agregar';
   btnAgregar.classList.add('boton-agregar');
@@ -301,9 +296,7 @@ function crearTarjetaProducto(producto) {
   return article;
 }
 
-// ===============================
 // 6) CARGAR PRODUCTOS SEGÚN PÁGINA
-// ===============================
 function cargarProductosSegunPagina() {
   const contenedor = document.querySelector('.grilla-productos');
   if (!contenedor) return;
