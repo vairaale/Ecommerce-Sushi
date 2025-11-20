@@ -320,6 +320,16 @@ function prepararCarrito() {
     btnEliminar.style.border = '1px solid #ccc';
     btnEliminar.style.cursor = 'pointer';
 
+   totalTexto.textContent = `Total: $ ${total}`;
+
+  // botón finalizar compra
+  const btnFinalizar = document.getElementById('btn-finalizar');
+  if (btnFinalizar) {
+    btnFinalizar.addEventListener('click', function () {
+      window.location.href = './finalizar.html';
+    });
+  }
+
     btnEliminar.addEventListener('click', function () {
       eliminarDelCarrito(item.id);
     });

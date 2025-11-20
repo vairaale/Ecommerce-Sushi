@@ -413,3 +413,172 @@ footer p{ margin:0; }
   width: 60%;                
   margin: 0 auto;            
 }
+/* Página de resumen de compra */
+.pagina-resumen {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.resumen-card {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  padding: 1.8rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.resumen-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.resumen-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #4caf50;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.resumen-card h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.resumen-subtitulo {
+  margin: 0.2rem 0 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Tabla del resumen */
+.tabla-resumen {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabla-resumen th,
+.tabla-resumen td {
+  padding: .6rem .5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.tabla-resumen thead th {
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+  background: #fafafa;
+}
+
+.tabla-resumen .col-precio,
+.tabla-resumen .col-subtotal {
+  text-align: right;
+}
+
+.tabla-resumen .col-cantidad {
+  text-align: center;
+}
+
+.total-final {
+  text-align: right;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+/* Botones de esta etapa */
+.boton-finalizar {
+  border: 1px solid var(--acento, #e53935);
+  background: transparent;
+  color: var(--acento, #e53935);
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-top: 1rem;
+  float: right;
+}
+
+.boton-finalizar:hover {
+  background: rgba(229,57,53,0.06);
+}
+
+.boton-confirmar {
+  width: 100%;
+  border: 0;
+  background: var(--acento, #e53935);
+  color: #fff;
+  padding: .7rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.boton-confirmar:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.boton-secundario {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  padding: .6rem 1rem;
+  cursor: pointer;
+  margin-top: .6rem;
+  font-size: 0.95rem;
+}
+
+.boton-secundario:hover {
+  background: #eee;
+}
+
+@media (max-width: 600px) {
+  .resumen-card {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .tabla-resumen th,
+  .tabla-resumen td {
+    font-size: 0.85rem;
+  }
+}
+/* Contenedor del botón Finalizar compra */
+.contenedor-finalizar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Botón de Finalizar compra EN EL CARRITO */
+.boton-finalizar {
+  background: var(--acento, #e53935);
+  color: #fff;
+  border: none;
+  padding: .65rem 1.4rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.boton-finalizar:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
